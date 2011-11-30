@@ -15,7 +15,7 @@ class Alphabet
 		end
 		
 		unless aptr < alen && bptr < blen then
-			raise ArgumentError.new("No differences found.")
+			raise ArgumentError.new("No differences found between #{a} and #{b}.")
 		end
 
 		return a[aptr].chr, b[bptr].chr
