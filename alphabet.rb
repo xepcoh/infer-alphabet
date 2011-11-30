@@ -45,14 +45,6 @@ class Alphabet
 		return alphabet
 	end
 
-	def show_vertices
-		@vertices.each do |k, v|
-			print k, "->"
-			v.each { |v2| print v2, " " }
-			print "\n"
-		end
-	end
-
 	def from_file(*args)
 		File.open(*args) do |file|
 			line_by_line(file)
