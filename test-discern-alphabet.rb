@@ -26,7 +26,7 @@ class TestAlphabet < Test::Unit::TestCase
 		assert(x == "b" && y = "d", "Failed for (abc, ad)")
 	end 
 
-	def test_display
+	def test_discern
                 p = <<INPUT_END
 aa
 ab
@@ -42,7 +42,40 @@ INPUT_END
 		a = Alphabet.new
 		a.line_by_line(p)
 
-		assert(a.build == %w(a b c d e f g), "Bad alphabet")
+		assert(a.discern == %w(a b c d e f g), "Failed happy path")
 	end
 
+	def test_discern_handles_no_diff
+                p = <<INPUT_END
+a
+ab
+ac
+ba
+INPUT_END
+	
+		a = Alphabet.new
+		a.line_by_line(p)
+
+		assert(a.discern == %w(a b c), "Failed no diff (proper substring)")
+
+                p = <<INPUT_END
+ab
+ab
+ac
+bc
+INPUT_END
+	
+		a = Alphabet.new
+		a.line_by_line(p)
+
+		assert(a.discern == %w(a b c), "Failed no diff (equal length)")
+	end
+
+	def test_discern_sample_input_works
+		expected = ["r", "c", "t", "s", "w", "m", "z", "p", "k", "o", "v", "x", "j", "d", "f", "u", "y", "a", "n", "b", "q", "i", "e", "g", "h", "l"]
+
+		alphabet = Alphabet.new
+		alphabet.from_file("./alphabet.txt", "r")
+		assert(alphabet.discern == expected, "Failed on sample input")
+	end
 end

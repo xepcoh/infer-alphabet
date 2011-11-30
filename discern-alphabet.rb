@@ -34,7 +34,7 @@ class Alphabet
 		d.add(f)
 	end
 
-	def build
+	def discern
 		alphabet = []
 		while @vertices.length > 0
 			top = @vertices.select { |k, v| v.length == 0 }[0][0]
@@ -73,6 +73,3 @@ class Alphabet
 	end
 end
 
-alphabet = Alphabet.new
-alphabet.from_file("/dev/stdin", "r")
-p alphabet.build
