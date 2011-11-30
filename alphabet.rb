@@ -37,7 +37,9 @@ class Alphabet
 	def discern
 		alphabet = []
 		while @vertices.length > 0
-			top = @vertices.select { |k, v| v.length == 0 }[0][0]
+			selected = @vertices.select { |k, v| v.length == 0 }
+			raise "Could not find first element.  Possible causes include file not being sorted or the set of words is insufficient for deducing the alphabet." if selected.length == 0
+			top = selected[0][0]
 			alphabet.push(top)
 			@vertices.each { |k, v| v.delete(top) }
 			s = @vertices.delete(top)

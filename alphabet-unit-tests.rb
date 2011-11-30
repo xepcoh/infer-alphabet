@@ -78,4 +78,22 @@ INPUT_END
 		alphabet.from_file("./alphabet.txt", "r")
 		assert(alphabet.discern == expected, "Failed on sample input")
 	end
+
+	def test_discern_with_garbage
+                p = <<INPUT_END
+sadf
+agfk
+kasdf
+kasdf
+qk
+wei
+kasd
+qier
+asdfk
+INPUT_END
+	
+		a = Alphabet.new
+		a.line_by_line(p)
+		a.discern
+	end
 end
