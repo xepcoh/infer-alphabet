@@ -94,6 +94,8 @@ INPUT_END
 	
 		a = Alphabet.new
 		a.line_by_line(p)
-		a.deduce
+		assert_raise RuntimeError do 
+			a.deduce
+		end
 	end
 end
