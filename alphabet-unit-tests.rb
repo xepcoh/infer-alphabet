@@ -1,4 +1,4 @@
-require 'discern-alphabet'
+require 'alphabet'
 require 'test/unit'
 
 class TestAlphabet < Test::Unit::TestCase
