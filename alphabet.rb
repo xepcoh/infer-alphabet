@@ -34,7 +34,7 @@ class Alphabet
 		d.add(f)
 	end
 
-	def discern
+	def deduce
 		alphabet = []
 		while @vertices.length > 0
 			selected = @vertices.select { |k, v| v.length == 0 }

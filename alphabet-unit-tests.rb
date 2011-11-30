@@ -26,7 +26,7 @@ class TestAlphabet < Test::Unit::TestCase
 		assert(x == "b" && y = "d", "Failed for (abc, ad)")
 	end 
 
-	def test_discern
+	def test_deduce
                 p = <<INPUT_END
 aa
 ab
@@ -42,10 +42,10 @@ INPUT_END
 		a = Alphabet.new
 		a.line_by_line(p)
 
-		assert(a.discern == %w(a b c d e f g), "Failed happy path")
+		assert(a.deduce == %w(a b c d e f g), "Failed happy path")
 	end
 
-	def test_discern_handles_no_diff
+	def test_deduce_handles_no_diff
                 p = <<INPUT_END
 a
 ab
@@ -56,7 +56,7 @@ INPUT_END
 		a = Alphabet.new
 		a.line_by_line(p)
 
-		assert(a.discern == %w(a b c), "Failed no diff (proper substring)")
+		assert(a.deduce == %w(a b c), "Failed no diff (proper substring)")
 
                 p = <<INPUT_END
 ab
@@ -68,18 +68,18 @@ INPUT_END
 		a = Alphabet.new
 		a.line_by_line(p)
 
-		assert(a.discern == %w(a b c), "Failed no diff (equal length)")
+		assert(a.deduce == %w(a b c), "Failed no diff (equal length)")
 	end
 
-	def test_discern_sample_input_works
+	def test_deduce_sample_input_works
 		expected = ["r", "c", "t", "s", "w", "m", "z", "p", "k", "o", "v", "x", "j", "d", "f", "u", "y", "a", "n", "b", "q", "i", "e", "g", "h", "l"]
 
 		alphabet = Alphabet.new
 		alphabet.from_file("./alphabet.txt", "r")
-		assert(alphabet.discern == expected, "Failed on sample input")
+		assert(alphabet.deduce == expected, "Failed on sample input")
 	end
 
-	def test_discern_with_garbage
+	def test_deduce_with_garbage
                 p = <<INPUT_END
 sadf
 agfk
@@ -94,6 +94,6 @@ INPUT_END
 	
 		a = Alphabet.new
 		a.line_by_line(p)
-		a.discern
+		a.deduce
 	end
 end
