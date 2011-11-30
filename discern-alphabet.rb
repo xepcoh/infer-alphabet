@@ -63,7 +63,11 @@ class Alphabet
 		prev = nil
 		value.each do |line|
 			cur = line.chomp
-			add(prev, cur) unless prev.nil?
+			begin
+				add(prev, cur) unless prev.nil?
+			rescue ArgumentError
+				# Just ignore
+			end
 			prev = cur
 		end
 	end
@@ -71,3 +75,4 @@ end
 
 alphabet = Alphabet.new
 alphabet.from_file("/dev/stdin", "r")
+p alphabet.build
