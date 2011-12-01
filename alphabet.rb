@@ -25,12 +25,8 @@ class Alphabet
 		f, s = find_first_diff(first.strip, second.strip)
 
 		d = @vertices[s]
-		if !d
-			@vertices[s] = d = Set.new()
-		end	
-		if !@vertices.has_key?(f)
-			@vertices[f] = Set.new()
-		end
+		@vertices[s] = d = Set.new() if !d
+		@vertices[f] = Set.new() if !@vertices.has_key?(f)
 		d.add(f)
 	end
 
