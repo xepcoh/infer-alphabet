@@ -14,9 +14,7 @@ class Alphabet
 			bptr += 1
 		end
 		
-		unless aptr < alen && bptr < blen then
-			raise ArgumentError.new("No differences found between #{a} and #{b}.")
-		end
+		raise ArgumentError.new("No differences found between #{a} and #{b}.") if aptr >= alen || bptr >= blen
 
 		return a[aptr].chr, b[bptr].chr
 	end
@@ -38,15 +36,13 @@ class Alphabet
 			top = selected[0][0]
 			alphabet.push(top)
 			@vertices.each { |k, v| v.delete(top) }
-			s = @vertices.delete(top)
+			@vertices.delete(top)
 		end
 		return alphabet
 	end
 
 	def from_file(*args)
-		File.open(*args) do |file|
-			line_by_line(file)
-		end
+		File.open(*args) { |file| line_by_line(file) }
 	end
 
 	def line_by_line(value)
